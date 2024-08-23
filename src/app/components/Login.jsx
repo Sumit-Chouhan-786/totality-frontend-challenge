@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 const Login = () => {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
@@ -52,13 +53,20 @@ const Login = () => {
           type="password"
           placeholder="Password"
         />
+
         <button
           onClick={handleSubmit}
-          className="bg-blue-500 text-white p-2 rounded-lg"
+          className="bg-blue-500 hover:bg-red-500 transition-all duration-300 text-white p-2 rounded-lg"
           type="submit"
         >
           Login
         </button>
+        <p className="text-white">
+            Don&apos;t have an account?{" "}
+          <Link href="/" className="underline cursor-pointer text-blue-500">
+            Sign Up
+          </Link>
+        </p>
       </form>
     </div>
   );

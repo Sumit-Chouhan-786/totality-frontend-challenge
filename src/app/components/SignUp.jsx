@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 const SignUp = () => {
   // use router for navigation
   const router = useRouter();
@@ -69,6 +70,12 @@ const SignUp = () => {
         >
           Sign Up
         </button>
+        <p className="text-white">
+          Already have an account?{" "}
+          <Link href="/login" className="underline cursor-pointer text-blue-500">
+            Login
+          </Link>
+        </p>
       </form>
     </div>
   );

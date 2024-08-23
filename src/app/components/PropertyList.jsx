@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropertyCard from "./PropertyCard";
 import Image from "next/image";
+import Link from "next/link";
 const PropertyList = ({ properties, onBook }) => {
   // state for filters
   const [filters, setFilters] = useState({
@@ -22,7 +23,6 @@ const PropertyList = ({ properties, onBook }) => {
     ) {
       return false;
     }
-
     // Extract the number of bedrooms from the string
     const propertyBedrooms = parseInt(property.bedrooms);
 
@@ -48,11 +48,14 @@ const PropertyList = ({ properties, onBook }) => {
 
   return (
     <div>
-      <div className="flex justify-between items-center pb-5">
+      <div className="flex justify-between items-center pb-10 md:pb-5">
         <h2 className="sm:text-2xl text-lg font-bold text-white">
           Search Properties
         </h2>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center group gap-1 relative">
+          <div className="absolute group-hover:block hidden right-0 text-sm sm:text-base px-5 bottom-[-60%] sm:bottom-[-80%] bg-white md:py-2 py-1 rounded-lg">
+            <Link href="/login">logout</Link>
+          </div>
           <Image
             height={50}
             width={50}

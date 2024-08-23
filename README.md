@@ -27,6 +27,10 @@
      - Checkout Success: Notify the user upon successful payment during checkout.
      - Error Handling: Display error notifications when an action fails (e.g., trying to book a property that's already fully booked).
 
+ 5. authentication:
+     - Implement user authentication to save bookings under a user profile.
+     - To store user data in local storage during authentication
+
 
 <!--================================================== Logical Approach ===============================-->
 
@@ -55,14 +59,11 @@
 3. Routing Logic:
    - Ensure that after a user signs up or logs in successfully, they are automatically redirected to the property booking page (Home route).
 
-4. Error Handling and Edge Cases:
+4. Error Handling:
    - Implement error handling for common issues, such as booking more properties than available or trying to proceed to checkout with an empty cart.
    - Display clear error messages to guide the user.
 
-5. Potential Enhancements:
-   - Add more filtering options like amenities or property type.
-   - Implement user authentication to save bookings under a user profile.
-   - Build an admin panel to manage properties and bookings.
+
 
 
 

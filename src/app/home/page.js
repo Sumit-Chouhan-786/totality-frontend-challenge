@@ -50,7 +50,7 @@ const Home = () => {
 
   return (
     <div className="bg-black">
-      <div className="container mx-auto p-6">
+      <div className="container mx-auto p-4 md:p-6">
         <PropertyList properties={properties} onBook={BOOK_HANDLER} />
         <div className="flex flex-wrap mt-10">
           <div className="w-full md:w-4/12 md:pe-3 md:mb-0 mb-5">
