@@ -2,17 +2,19 @@
 import React from "react";
 
 const Cart = ({ bookings, onIncrease, onDecrease, onRemove }) => {
+  // calculate total cost
   const totalCost = bookings.reduce(
     (acc, booking) => acc + booking.price * booking.quantity,
     0
   );
 
   return (
-    <div className="p-4 h-full border rounded-lg shadow-lg">
+    <div className="p-4 h-full border bg-white rounded-lg shadow-lg">
       <h2 className="text-2xl font-semibold mb-4">Cart</h2>
       {bookings.length === 0 ? (
         <p>No bookings yet.</p>
       ) : (
+        // map bookings to cart
         bookings.map((booking, index) => (
           <div key={index} className="mb-4">
             <h3 className="text-lg font-semibold">{booking.title}</h3>

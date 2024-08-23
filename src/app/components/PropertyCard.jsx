@@ -1,9 +1,10 @@
 import Image from "next/image";
 import React from "react";
-
+// pass props property and onBook
 const PropertyCard = ({ property, onBook }) => {
   return (
-    <div className="border group rounded-lg overflow-hidden shadow-lg max-w-[327px] md:max-w-none md:mx-0 mx-auto">
+    // property card ui
+    <div className="border w-full bg-white shadow-lg group rounded-lg overflow-hidden max-w-[327px] md:max-w-none md:mx-0 mx-auto">
       <Image
         height={200}
         width={200}
@@ -18,7 +19,7 @@ const PropertyCard = ({ property, onBook }) => {
         <p className="text-gray-700">{property.location}</p>
         <button
           onClick={() => onBook(property)}
-          className="mt-4 bg-slate-100 text-black py-2 hover:bg-blue-500 hover:text-white transition-all duration-300 px-4 rounded"
+          className="mt-4 hover:bg-red-500 text-white py-2 bg-blue-500 hover:text-white transition-all duration-300 px-4 rounded"
         >
           Book Now
         </button>

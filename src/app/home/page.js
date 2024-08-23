@@ -3,46 +3,12 @@ import React, { useState } from "react";
 import PropertyList from "../components/PropertyList";
 import Cart from "../components/Cart";
 import Checkout from "../components/Checkout";
-
+import { properties } from "../components/common/helper";
 const Home = () => {
-  const [properties] = useState([
-    {
-      id: 1,
-      title: "Modern Apartment",
-      location: "New York",
-      bedrooms: "1 bed",
-      price: 120,
-      myImage: "/assets/images/modern-apartment.jpg",
-    },
-    {
-      id: 2,
-      title: "Beach House",
-      location: "Thailand",
-      bedrooms: "2 bed",
-      price: 200,
-      myImage: "/assets/images/near-beach.jpg",
-    },
-    {
-      id: 3,
-      title: "Near the City",
-      location: "Goa",
-      bedrooms: "3 bed",
-      price: 250,
-      myImage: "/assets/images/near-city.jpg",
-    },
-    {
-      id: 4,
-      title: "On the Hills",
-      bedrooms: "4 bed",
-      location: "Mumbai",
-      price: 350,
-      myImage: "/assets/images/on-hills.jpg",
-    },
-  ]);
-
+  // state for bookings
   const [bookings, setBookings] = useState([]);
 
-  const handleBook = (property) => {
+  const BOOK_HANDLER = (property) => {               
     setBookings((prevBookings) => {
       const existingBooking = prevBookings.find((b) => b.id === property.id);
       if (existingBooking) {
@@ -55,7 +21,8 @@ const Home = () => {
     });
   };
 
-  const handleIncrease = (booking) => {
+  // handle increase
+  const QUANTITY_INCREASE_HANDLER = (booking) => {
     setBookings((prevBookings) =>
       prevBookings.map((b) =>
         b.id === booking.id ? { ...b, quantity: b.quantity + 1 } : b
@@ -63,7 +30,8 @@ const Home = () => {
     );
   };
 
-  const handleDecrease = (booking) => {
+  // handle decrease
+  const QUANTITY_DECREASE_HANDLER = (booking) => {
     setBookings((prevBookings) =>
       prevBookings
         .map((b) =>
@@ -73,23 +41,24 @@ const Home = () => {
     );
   };
 
-  const handleRemove = (booking) => {
+  // handle remove
+  const REMOVE_HANDLER = (booking) => {
     setBookings((prevBookings) =>
       prevBookings.filter((b) => b.id !== booking.id)
     );
   };
 
   return (
-    <>
+    <div className="bg-black">
       <div className="container mx-auto p-6">
-        <PropertyList properties={properties} onBook={handleBook} />
+        <PropertyList properties={properties} onBook={BOOK_HANDLER} />
         <div className="flex flex-wrap mt-10">
           <div className="w-full md:w-4/12 md:pe-3 md:mb-0 mb-5">
             <Cart
               bookings={bookings}
-              onIncrease={handleIncrease}
-              onDecrease={handleDecrease}
-              onRemove={handleRemove}
+              onIncrease={QUANTITY_INCREASE_HANDLER}
+              onDecrease={QUANTITY_DECREASE_HANDLER}
+              onRemove={REMOVE_HANDLER}
             />
           </div>
           <div className="w-full md:w-8/12 md:ps-2">
@@ -102,7 +71,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

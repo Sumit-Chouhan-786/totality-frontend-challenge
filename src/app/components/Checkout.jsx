@@ -3,43 +3,53 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Checkout = ({ totalCost }) => {
-  const paymentSuccess = () => toast("Payment Successful");
-  const fillInFields = () => toast("Please fill in all fields");
-  const invalidPhone = () => toast("Please enter a valid phone number");
-  const invalidCard = () => toast("Please enter a valid card number");
-  const invalidExpiry = () => toast("Please enter a valid expiry date");
-  const invalidCVV = () => toast("Please enter a valid CVV");
+  // contact info
   const [contactInfo, setContactInfo] = useState({
     name: "",
     email: "",
     phone: "",
   });
+  // payment details
   const [paymentDetails, setPaymentDetails] = useState({
     cardNumber: "",
     expiry: "",
     cvv: "",
   });
-
+  // checkout handler
   const CHECKOUT_HANDLER = () => {
+    // check if all fields are filled
+    if (
+      contactInfo.name === "" ||
+      contactInfo.email === "" ||
+      contactInfo.phone === "" ||
+      paymentDetails.cardNumber === "" ||
+      paymentDetails.expiry === "" ||
+      paymentDetails.cvv === ""
+    ) {
+      toast("Please fill in all fields");
+      return;
+    }
+    //input validation
     if (contactInfo.phone.length < 10) {
-      invalidPhone();
+      toast("Please enter a valid phone number");
       return;
     }
     if (paymentDetails.cardNumber.length < 16) {
-      invalidCard();
+      toast("Please enter a valid card number");
       return;
     }
-    if (  
+    if (
       paymentDetails.expiry.length < 5 ||
       !paymentDetails.expiry.includes("/")
     ) {
-      invalidExpiry();
+      toast("Please enter a valid expiry date");
       return;
     }
     if (paymentDetails.cvv.length < 3) {
-      invalidCVV();
+      toast("Please enter a valid CVV");
       return;
     }
+    // if all fields are filled
     if (
       contactInfo.name &&
       contactInfo.email &&
@@ -48,7 +58,8 @@ const Checkout = ({ totalCost }) => {
       paymentDetails.expiry &&
       paymentDetails.cvv
     ) {
-      paymentSuccess();
+      toast("Payment Successful");
+      // reset fields
       setContactInfo({
         name: "",
         email: "",
@@ -59,13 +70,12 @@ const Checkout = ({ totalCost }) => {
         expiry: "",
         cvv: "",
       });
-    } else {
-      fillInFields();
     }
   };
 
   return (
-    <div className="p-4 border rounded-lg shadow-lg">
+    // checkout form ui
+    <div className="p-4 border bg-white rounded-lg shadow-lg">
       <ToastContainer position="bottom-right" />
       <h2 className="text-2xl font-semibold mb-4">Checkout</h2>
       <div className="mb-4">
