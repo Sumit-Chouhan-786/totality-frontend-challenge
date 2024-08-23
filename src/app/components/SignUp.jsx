@@ -2,17 +2,22 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { OpenEyes, CloseEyes } from "./common/icons";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+
 const SignUp = () => {
   // use router for navigation
   const router = useRouter();
+
   // sign up info
   const [signUpInfo, setSignUpInfo] = useState({
     name: "",
     email: "",
     password: "",
+    showPassword: false, 
   });
+
   // handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,6 +34,15 @@ const SignUp = () => {
       toast.error("Please fill the form");
     }
   };
+
+  // function to toggle password visibility
+  const showPass = () => {
+    setSignUpInfo((prevState) => ({
+      ...prevState,
+      showPassword: !prevState.showPassword,
+    }));
+  };
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-cover bg-center bg-no-repeat bg-[url('/assets/images/home-bg.avif')]">
       <ToastContainer />
@@ -54,25 +68,36 @@ const SignUp = () => {
             setSignUpInfo({ ...signUpInfo, email: e.target.value })
           }
         />
-        <input
-          className="w-full p-2 border outline-none rounded mb-2 text-black"
-          type="password"
-          placeholder="Password"
-          value={signUpInfo.password}
-          onChange={(e) =>
-            setSignUpInfo({ ...signUpInfo, password: e.target.value })
-          }
-        />
+        <div className="relative">
+          <div
+            onClick={showPass}
+            className="absolute right-[2%] top-1/2 text-gray-500 -translate-y-1/2 pb-2 cursor-pointer"
+          >
+            {signUpInfo.showPassword ? <OpenEyes /> : <CloseEyes />}
+          </div>
+          <input
+            className="w-full ps-2 pe-7 py-2 border outline-none rounded mb-2 text-black"
+            type={signUpInfo.showPassword ? "text" : "password"} // dynamically change the input type
+            placeholder="Password"
+            value={signUpInfo.password}
+            onChange={(e) =>
+              setSignUpInfo({ ...signUpInfo, password: e.target.value })
+            }
+          />
+        </div>
         <button
           onClick={handleSubmit}
           type="submit"
-          className="w-full p-2 transition-all duration-300  hover:bg-red-500 text-white bg-blue-500 rounded mb-2"
+          className="w-full p-2 transition-all duration-300 hover:bg-red-500 text-white bg-blue-500 rounded mb-2"
         >
           Sign Up
         </button>
         <p className="text-white">
           Already have an account?{" "}
-          <Link href="/login" className="underline cursor-pointer text-blue-500">
+          <Link
+            href="/login"
+            className="underline cursor-pointer text-blue-500"
+          >
             Login
           </Link>
         </p>
